@@ -3,9 +3,9 @@ import React from 'react'
 const Todo = ({ todo: { name, priority, done } }) => {
   return (
     <li>
-      <input type='checkbox' checked={Boolean(done)} />
+      <input type='checkbox' id={name} checked={Boolean(done)} onChange={() => console.log('chupalo')} />
       {done ? 'Done' : 'Not done'}
-      <strong>{name} </strong>
+      <label htmlFor={name}>{name}</label>
       {priority ? 'Not Priority' : 'Priority'}
       <button>Delete</button>
     </li >
