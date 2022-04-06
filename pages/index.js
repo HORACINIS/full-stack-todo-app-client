@@ -33,7 +33,10 @@ export default function Home() {
         <h1>My todos</h1>
         <ul>
           {todos && todos.map(({ name, priority, done, _id }) => (
-            <li key={_id}>{name}</li>
+            <li key={_id}>
+              {name} {priority ? 'Not Priority' : 'Priority'} {done ? 'Done' : 'Not Done'}
+              <button>Delete</button>
+            </li>
           ))}
         </ul>
       </div>
