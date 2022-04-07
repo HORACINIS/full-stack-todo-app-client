@@ -16,6 +16,7 @@ const CreateTodoTextBar = ({ todos, setTodos }) => {
       });
       const data = await response.json()
       setTodos([...todos, { ...data.data.todo }]);
+      e.target.elements.todoName.value = '';
     } catch (err) {
       console.log('Error!', err);
     }
@@ -23,7 +24,7 @@ const CreateTodoTextBar = ({ todos, setTodos }) => {
 
   return (
     <form onSubmit={handleAddTodo}>
-      <input type='text' id='todoName'></input>
+      <input type='text' id='todoName' />
       <button type='submit'>Add</button>
     </form>
   )
