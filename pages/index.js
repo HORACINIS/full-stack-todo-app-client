@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import CreateTodoTextBar from "../components/CreateTodoTextBar";
 import Todos from "../components/Todos";
 // import Image from "next/image";
 
@@ -16,13 +17,13 @@ export default function Home() {
       setLoading(false);
       console.log(data.data.todos)
     } catch (err) {
-      console.log(err);
+      console.log('Error!', err);
     }
   }
 
   useEffect(() => {
     getTodos();
-  }, [])
+  }, []);
 
   return (
     <div>
@@ -34,7 +35,8 @@ export default function Home() {
 
       <div>
         <h1>My todos</h1>
-        {!loading && <Todos todos={todos} /> || <h3>Loading...</h3>}
+        <CreateTodoTextBar todos={todos} setTodos={setTodos} />
+        {!loading && <Todos todos={todos} /> || <h2>Loading...</h2>}
       </div>
     </div>
   );

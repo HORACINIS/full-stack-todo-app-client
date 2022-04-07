@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Todo from './Todo';
 
 const Todos = ({ todos }) => {
+
   return (
     <ul>
       {todos && todos.map((todo) => (
@@ -9,6 +10,6 @@ const Todos = ({ todos }) => {
       ))}
     </ul>
   )
-}
+};
 
-export default Todos
+export default Todos;
