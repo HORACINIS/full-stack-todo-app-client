@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CreateTodoTextBar = () => {
+const CreateTodoTextBar = ({ todos, setTodos }) => {
   const TODOS_URL = 'api/v1/todos';
 
   const handleAddTodo = async (e) => {
@@ -15,9 +15,9 @@ const CreateTodoTextBar = () => {
         }
       });
       const data = await response.json()
-      console.log(data)
+      setTodos([...todos, { ...data.data.todo }]);
     } catch (err) {
-      console.log(err)
+      console.log('Error!', err);
     }
   }
 
@@ -25,7 +25,6 @@ const CreateTodoTextBar = () => {
     <form onSubmit={handleAddTodo}>
       <input type='text' id='todoName'></input>
       <button type='submit'>Add</button>
-
     </form>
   )
 }
