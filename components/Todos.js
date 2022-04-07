@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Todo from './Todo';
 
-const Todos = ({ todos }) => {
+const Todos = ({ todos, setTodos }) => {
 
   return (
     <ul>
       {todos && todos.map((todo) => (
-        <Todo todo={todo} key={todo._id} />
+        <Todo todo={todo} todos={todos} setTodos={setTodos} key={todo._id} />
       ))}
     </ul>
   )
