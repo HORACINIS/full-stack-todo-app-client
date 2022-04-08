@@ -22,14 +22,13 @@ const CreateTodoTextBar = ({ todos, setTodos }) => {
       setTodos([...todos, { ...data.data.todo }]);
       // e.target.elements.todoName.value = ''; // to be removed
       setTextInput('');
-      setDisabledFields(false)
+      setDisabledFields(false);
     } catch (err) {
-      setDisabledFields(false)
+      setDisabledFields(false);
       alert('No internet connection. Your request could not be sent');
       console.log('Error!', err);
     }
   }
-
 
   return (
     <form onSubmit={handleAddTodo}>
