@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const CreateTodoTextBar = ({ todos, setTodos }) => {
   const TODOS_URL = 'api/v1/todos';
-  const [textInput, setTextInput] = React.useState('');
-  const [disabledFields, setDisabledFields] = React.useState(false);
+  const [textInput, setTextInput] = useState('');
+  const [disabledFields, setDisabledFields] = useState(false);
 
   const handleAddTodo = async (e) => {
     e.preventDefault();
@@ -19,7 +19,7 @@ const CreateTodoTextBar = ({ todos, setTodos }) => {
         }
       });
       const data = await response.json()
-      setTodos([...todos, { ...data.data.todo }]);
+      setTodos((prevTodos) => [...prevTodos, { ...data.data.todo }]);
       // e.target.elements.todoName.value = ''; // to be removed
       setTextInput('');
       setDisabledFields(false);
@@ -32,7 +32,7 @@ const CreateTodoTextBar = ({ todos, setTodos }) => {
 
   return (
     <form onSubmit={handleAddTodo}>
-      <input type='text' id='todoName' disabled={disabledFields} onChange={(e) => setTextInput(e.target.value)} value={textInput} />
+      <input type='text' disabled={disabledFields} onChange={(e) => setTextInput(e.target.value)} value={textInput} />
       <button disabled={disabledFields} type='submit'>Add</button>
     </form>
   )
