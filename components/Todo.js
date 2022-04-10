@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const Todo = ({ todo, todos, setTodos }) => {
   const { _id, name, priority, done } = todo
@@ -42,31 +42,65 @@ const Todo = ({ todo, todos, setTodos }) => {
     }
   }
 
-  const handleEditTodoName = () => {
-    // console.log(e.target.value)
-    // setNewTodoName(e.target.value)
+  const handleChangeTodoName = async (todoProp, todoPropValue) => {
+    console.log('chupalo')
+    // console.dir(`${e.target.elements}.${todoPropValue}`.value)
+    // e.target.elements[name].focus()
+    editableInput.current.focus()
+    try {
+      const updatedTodos = todos.map((obj) => {
+        if (obj._id === _id) {
+          return { ...obj, [todoProp]: todoPropValue }
+        }
+        return obj;
+      });
+
+      await fetch(`${TODOS_URL}/${_id}`, {
+        method: "PATCH",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ ...todo, [todoProp]: todoPropValue })
+      })
+      // .then(response => { console.log(response.status); return response.json(); })
+      // .then(data => console.log(data.data.todo));
+      setTodos(updatedTodos);
+    } catch (err) {
+      console.log('Error', err);
+    }
+  }
+
+  const handleEditTodoNameTextInput = () => {
     setNewTodoName(editableInput.current.value)
-    // e.target.focus();
-    // console.log(e.target)
   }
 
   return (
     <li>
       <p>
         <input type='checkbox' id={name} checked={Boolean(done)} onChange={() => handleChangeTodoProp('done')} />
-        {!editable && <label htmlFor={name}> <strong>{name}</strong></label> || <input onChange={handleEditTodoName} htmlFor={name} ref={editableInput} type='text' value={newTodoName} />}
+
+        {!editable &&
+          (<label htmlFor={name}> <strong>{name}</strong></label>)
+          ||
+          (<input onChange={handleEditTodoNameTextInput} autoFocus ref={editableInput} type='text' value={newTodoName} />)
+        }
+
         <span onClick={() => handleChangeTodoProp('priority')}>{priority ? ' *Not Priority* ' : ' *Priority* '}</span>
 
-        <button onClick={() => {
-          setEditable(!editable)
-          console.log(editable)
-          editable && console.log(editableInput.current.value)
-          console.log(editable)
-        }}>{!editable && 'Edit' || 'Save'}</button>
+        {!editable && (
+          <button onClick={() => {
+            setEditable(!editable)
+            setNewTodoName(name);
+          }}>Edit</button>
+        ) || (
+            <button onClick={() => {
+              setEditable(!editable)
+              handleChangeTodoName('name', newTodoName)
+            }}>Save</button>
+          )
+        }
 
         <button onClick={() => handleDeleteTodo(todo)}>Delete</button>
       </p>
-    </li >
+    </li>
   )
 }
 
