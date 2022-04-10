@@ -5,7 +5,7 @@ const Todo = ({ todo, todos, setTodos }) => {
   const TODOS_URL = 'api/v1/todos';
   const [editable, setEditable] = useState(false);
   const [newTodoName, setNewTodoName] = useState(name);
-  const editableInput = useRef();
+  const editableInput = useRef(name);
 
   const handleDeleteTodo = async () => {
     try {
@@ -42,17 +42,19 @@ const Todo = ({ todo, todos, setTodos }) => {
     }
   }
 
-  const handleEditTodoName = (e) => {
+  const handleEditTodoName = () => {
     // console.log(e.target.value)
-    setNewTodoName(e.target.value)
-    e.target.focus();
+    // setNewTodoName(e.target.value)
+    setNewTodoName(editableInput.current.value)
+    // e.target.focus();
+    // console.log(e.target)
   }
 
   return (
     <li>
       <p>
         <input type='checkbox' id={name} checked={Boolean(done)} onChange={() => handleChangeTodoProp('done')} />
-        {!editable && <label htmlFor={name}> <strong>{name}</strong></label> || <input onChange={handleEditTodoName} ref={editableInput} htmlFor={name} type='text' value={newTodoName} />}
+        {!editable && <label htmlFor={name}> <strong>{name}</strong></label> || <input onChange={handleEditTodoName} htmlFor={name} ref={editableInput} type='text' value={newTodoName} />}
         <span onClick={() => handleChangeTodoProp('priority')}>{priority ? ' *Not Priority* ' : ' *Priority* '}</span>
 
         <button onClick={() => {
