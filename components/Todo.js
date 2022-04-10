@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 
 const Todo = ({ todo, todos, setTodos }) => {
   const { _id, name, priority, done } = todo
@@ -43,10 +43,6 @@ const Todo = ({ todo, todos, setTodos }) => {
   }
 
   const handleChangeTodoName = async (todoProp, todoPropValue) => {
-    console.log('chupalo')
-    // console.dir(`${e.target.elements}.${todoPropValue}`.value)
-    // e.target.elements[name].focus()
-    editableInput.current.focus()
     try {
       const updatedTodos = todos.map((obj) => {
         if (obj._id === _id) {
@@ -69,13 +65,13 @@ const Todo = ({ todo, todos, setTodos }) => {
   }
 
   const handleEditTodoNameTextInput = () => {
-    setNewTodoName(editableInput.current.value)
+    setNewTodoName(editableInput.current.value);
   }
 
   return (
     <li>
       <p>
-        <input type='checkbox' id={name} checked={Boolean(done)} onChange={() => handleChangeTodoProp('done')} />
+        <input type='checkbox' id={name} checked={done} onChange={() => handleChangeTodoProp('done')} />
 
         {!editable &&
           (<label htmlFor={name}> <strong>{name}</strong></label>)
