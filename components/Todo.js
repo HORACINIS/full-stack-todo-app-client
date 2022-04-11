@@ -8,7 +8,7 @@ const Todo = ({ todo, todos, setTodos }) => {
   const editableInput = useRef(name);
 
   return (
-    <li onPointerLeave={() => setEditable(false)} >
+    <li onMouseLeave={() => setEditable(false)}>
       <p>
         <input type='checkbox' id={name} checked={done} onChange={() => handleChangeTodoProp(todos, todo, setTodos, 'done')} />
 
