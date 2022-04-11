@@ -8,7 +8,7 @@ const Todo = ({ todo, todos, setTodos }) => {
   const editableInput = useRef(name);
 
   return (
-    <li>
+    <li onPointerLeave={() => setEditable(false)} onMouseLeave={() => setEditable(false)}>
       <p>
         <input type='checkbox' id={name} checked={done} onChange={() => handleChangeTodoProp(todos, todo, setTodos, 'done')} />
 
@@ -18,7 +18,7 @@ const Todo = ({ todo, todos, setTodos }) => {
           (<input onChange={() => setNewTodoName(editableInput.current.value)} autoFocus ref={editableInput} type='text' value={newTodoName} />)
         }
 
-        <span onClick={() => handleChangeTodoProp(todos, todo, setTodos, 'priority')}>{priority ? ' *Not Priority* ' : ' *Priority* '}</span>
+        <span onClick={() => handleChangeTodoProp(todos, todo, setTodos, 'priority')}>{!priority ? ' *Not Priority* ' : ' *Priority* '}</span>
 
         {!editable && (
           <button onClick={() => {
