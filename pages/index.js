@@ -23,6 +23,7 @@ export default function Home() {
 
   useEffect(() => {
     getTodos();
+    console.log(process.env.NODE_ENV)
   }, []);
 
   return (
