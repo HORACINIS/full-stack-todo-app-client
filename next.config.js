@@ -5,7 +5,7 @@ const nextConfig = {
     return [
       {
         source: '/api/v1/todos/:path*',
-        // destination: '/:path*' // for production
+        // destination: '/:path*' // for when running the client server in production
         destination: 'http://localhost:4000/api/v1/todos/:path*' // Proxy to Backend for when in development
       }
     ]
