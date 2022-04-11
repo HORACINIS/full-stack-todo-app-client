@@ -4,8 +4,7 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        // source: '/api/v1/todos/:path*',
-        source: '/:path*',
+        source: '/api/v1/todos/:path*',
         // destination: '/:path*' // for production
         destination: 'http://localhost:4000/api/v1/todos/:path*' // Proxy to Backend for when in development
       }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const CreateTodoTextBar = ({ todos, setTodos }) => {
-  const TODOS_URL = 'api/v1/todos';
+  const TODOS_URL = process.env.NODE_ENV === 'development' ? 'api/v1/todos' : 'https://full-stack-todo-app-server.herokuapp.com/api/v1/todos';
   const [textInput, setTextInput] = useState('');
   const [disabledFields, setDisabledFields] = useState(false);
 
