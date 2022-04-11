@@ -22,7 +22,7 @@ const Todo = ({ todo, todos, setTodos }) => {
           <span onClick={() => handleChangeTodoProp(todos, todo, setTodos, 'priority')}>{!priority ? ' *Not Priority* ' : ' *Priority* '}</span>
 
           {!editable && (
-            <button type='submit' onClick={() => {
+            <button onClick={() => {
               setEditable(!editable)
               setNewTodoName(name);
             }}>Edit</button>
