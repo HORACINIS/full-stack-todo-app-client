@@ -1,5 +1,5 @@
 
-const TODOS_URL = 'api/v1/todos';
+const TODOS_URL = process.env.NODE_ENV === 'development' ? 'api/v1/todos' : 'https://full-stack-todo-app-server.herokuapp.com/api/v1/todosF';
 
 export const handleDeleteTodo = async (todosArr, todoItem, setState) => {
   try {
