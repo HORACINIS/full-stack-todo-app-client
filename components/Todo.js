@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { handleChangeTodoProp, handleDeleteTodo } from '../utils/manageTodosMethods';
 
-const Todo = ({ todo, todos, setTodos }) => {
+const Todo = ({ todo, setTodos }) => {
   const { name, priority, done } = todo
   const [editable, setEditable] = useState(false);
   const [newTodoName, setNewTodoName] = useState(name);
@@ -11,7 +11,7 @@ const Todo = ({ todo, todos, setTodos }) => {
     <li onMouseLeave={() => setEditable(false)}>
       <form onSubmit={(e) => e.preventDefault()}>
         <p>
-          <input type='checkbox' id={name} checked={done} onChange={() => handleChangeTodoProp(todos, todo, setTodos, 'done')} />
+          <input type='checkbox' id={name} checked={done} onChange={() => handleChangeTodoProp(todo, setTodos, 'done')} />
 
           {!editable &&
             (<label htmlFor={name}> <strong>{name}</strong></label>)
@@ -19,7 +19,7 @@ const Todo = ({ todo, todos, setTodos }) => {
             (<input onChange={() => setNewTodoName(editableInput.current.value)} autoFocus ref={editableInput} type='text' value={newTodoName} />)
           }
 
-          <span onClick={() => handleChangeTodoProp(todos, todo, setTodos, 'priority')}>{!priority ? ' *Not Priority* ' : ' *Priority* '}</span>
+          <span onClick={() => handleChangeTodoProp(todo, setTodos, 'priority')}>{!priority ? ' *Not Priority* ' : ' *Priority* '}</span>
 
           {!editable && (
             <button type='submit' onClick={() => {
@@ -29,7 +29,7 @@ const Todo = ({ todo, todos, setTodos }) => {
           ) || (
               <button type='submit' onClick={() => {
                 setEditable(!editable)
-                handleChangeTodoProp(todos, todo, setTodos, 'name', newTodoName)
+                handleChangeTodoProp(todo, setTodos, 'name', newTodoName)
               }}>Save</button>
             )
           }

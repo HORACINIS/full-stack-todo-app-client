@@ -6,7 +6,7 @@ const Todos = ({ todos, setTodos }) => {
   return (
     <ul>
       {todos && todos.map((todo) => (
-        <Todo todo={todo} todos={todos} setTodos={setTodos} key={todo._id} />
+        <Todo todo={todo} setTodos={setTodos} key={todo._id} />
       ))}
     </ul>
   )
