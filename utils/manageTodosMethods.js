@@ -13,6 +13,27 @@ export const fetchTodos = async () => {
   }
 }
 
+export const handleAddTodo = async (e, textInput, setState) => {
+  e.preventDefault();
+  await fetch(TODOS_URL, {
+    method: 'POST',
+    body: JSON.stringify({ name: textInput }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.status === 'success') {
+        fetchTodos().then(todos => setState(todos))
+      }
+    })
+    .catch((err) => {
+      alert(err);
+      console.log('Error!', err);
+    })
+}
+
 export const handleDeleteTodo = async (todoItem, setState) => {
   await fetch(`${TODOS_URL}/${todoItem._id}`, {
     method: 'DELETE'
