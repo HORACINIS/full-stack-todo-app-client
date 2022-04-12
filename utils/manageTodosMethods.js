@@ -9,6 +9,7 @@ export const fetchTodos = async () => {
     return data.data.todos;
   } catch (err) {
     console.log('Error!', err);
+    alert(err);
   }
 }
 
@@ -22,7 +23,11 @@ export const handleDeleteTodo = async (todoItem, setState) => {
         fetchTodos().then(todos => setState(todos))
       }
     })
-    .catch((err) => console.log('Error!', err));
+    .catch((err) => {
+      console.log('Error!', err);
+      alert(err);
+    }
+    );
 }
 
 export const handleChangeTodoProp = async (todoItem, setState, ...args) => {
