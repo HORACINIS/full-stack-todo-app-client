@@ -8,9 +8,9 @@ const CreateTodoTextBar = ({ todos, setTodos }) => {
   const handleAddTodoAction = (e) => {
     handleAddTodo(e, textInput, setTodos)
       .then(() => {
-        setDisabledFields(true)
+        // setDisabledFields(true)
         setTextInput('');
-        setDisabledFields(false);
+        // setDisabledFields(false);
       })
       // .catch((err) => {
       //   console.log('Error', err);
