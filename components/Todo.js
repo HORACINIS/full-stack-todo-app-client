@@ -14,7 +14,7 @@ const Todo = ({ todo, setTodos }) => {
           <input type='checkbox' id={name} checked={done} onChange={() => handleChangeTodoProp(todo, setTodos, 'done')} />
 
           {!editable &&
-            (<label htmlFor={name}> <strong>{name}</strong></label>)
+            (!done && <label htmlFor={name}> <strong>{name}</strong></label> || <label htmlFor={name}><del> <strong>{name}</strong></del></label>)
             ||
             (<input onChange={() => setNewTodoName(editableInput.current.value)} autoFocus ref={editableInput} type='text' value={newTodoName} />)
           }
