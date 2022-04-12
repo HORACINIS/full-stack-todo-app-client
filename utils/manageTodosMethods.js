@@ -1,16 +1,33 @@
 
 const TODOS_URL = process.env.NODE_ENV === 'development' ? 'api/v1/todos' : 'https://full-stack-todo-app-server.herokuapp.com/api/v1/todos';
 
-export const handleDeleteTodo = async (todosArr, todoItem, setState) => {
+export const fetchTodos = async () => {
   try {
-    await fetch(`${TODOS_URL}/${todoItem._id}`, {
-      method: 'DELETE'
-    });
-    const updatedTodos = todosArr.filter((selectedTodo) => selectedTodo._id !== todoItem['_id']);
-    setState(updatedTodos);
+    const response = await fetch(TODOS_URL);
+    const data = await response.json();
+    console.log(data.data.todos)
+    return data.data.todos;
   } catch (err) {
     console.log('Error!', err);
   }
+}
+
+export const handleDeleteTodo = async (todosArr, todoItem, setState) => {
+  // try {
+  await fetch(`${TODOS_URL}/${todoItem._id}`, {
+    method: 'DELETE'
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.status === 'success') {
+        const updatedTodos = todosArr.filter((selectedTodo) => selectedTodo._id !== todoItem['_id']);
+        setState(updatedTodos);
+      }
+    })
+    .catch((err) => console.log('Error!', err));
+  // } catch (err) {
+  //   console.log('Error!', err);
+  // }
 }
 
 export const handleChangeTodoProp = async (todosArr, todoItem, setState, ...args) => {
@@ -52,4 +69,6 @@ export const handleChangeTodoProp = async (todosArr, todoItem, setState, ...args
   } catch (err) {
     console.log('Error', err);
   }
+
+
 }
