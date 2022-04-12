@@ -13,8 +13,9 @@ export const fetchTodos = async () => {
   }
 }
 
-export const handleAddTodo = async (e, textInput, setState) => {
+export const handleAddTodo = async (e, textInput, setState, setDisableFieldsState) => {
   e.preventDefault();
+  setDisableFieldsState(true);
   await fetch(TODOS_URL, {
     method: 'POST',
     body: JSON.stringify({ name: textInput }),
@@ -26,11 +27,13 @@ export const handleAddTodo = async (e, textInput, setState) => {
     .then((data) => {
       if (data.status === 'success') {
         fetchTodos().then(todos => setState(todos))
+        setDisableFieldsState(false);
       }
     })
     .catch((err) => {
       alert(err);
       console.log('Error!', err);
+      setDisableFieldsState(false);
     })
 }
 
