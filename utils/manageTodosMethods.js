@@ -84,7 +84,7 @@ export const handleChangeTodoProp = async (todoItem, setState, ...args) => {
         })
     }
   } catch (err) {
-    console.log('Error', err);
+    console.log('Error!', err);
     alert(err);
   }
 }

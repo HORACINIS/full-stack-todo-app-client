@@ -27,7 +27,7 @@ export default function Home() {
 
       <div>
         <h1>My todos</h1>
-        <CreateTodoTextBar todos={todos} setTodos={setTodos} />
+        <CreateTodoTextBar setTodos={setTodos} />
         {!loading && <Todos todos={todos} setTodos={setTodos} /> || <h2>Loading...</h2>}
       </div>
     </div>

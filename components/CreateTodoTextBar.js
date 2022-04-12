@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
 import { handleAddTodo } from '../utils/manageTodosMethods';
 
-const CreateTodoTextBar = ({ todos, setTodos }) => {
+const CreateTodoTextBar = ({ setTodos }) => {
   const [textInput, setTextInput] = useState('');
   const [disabledFields, setDisabledFields] = useState(false);
 
   const handleAddTodoAction = (e) => {
     handleAddTodo(e, textInput, setTodos, setDisabledFields)
       .then(() => {
-        // setDisabledFields(true)
         setTextInput('');
-        // setDisabledFields(false);
       })
-      // .catch((err) => {
-      //   console.log('Error', err);
-      //   alert(err)
-      //   setDisabledFields(false);
-      // })
+    // .catch((err) => {
+    //   console.log('Error', err);
+    //   alert(err)
+    //   setDisabledFields(false);
+    // })
   }
 
   return (
