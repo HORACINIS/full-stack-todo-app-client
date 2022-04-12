@@ -22,7 +22,7 @@ const Todo = ({ todo, todos, setTodos }) => {
           <span onClick={() => handleChangeTodoProp(todos, todo, setTodos, 'priority')}>{!priority ? ' *Not Priority* ' : ' *Priority* '}</span>
 
           {!editable && (
-            <button onClick={() => {
+            <button type='submit' onClick={() => {
               setEditable(!editable)
               setNewTodoName(name);
             }}>Edit</button>
@@ -34,7 +34,7 @@ const Todo = ({ todo, todos, setTodos }) => {
             )
           }
 
-          <button onClick={() => handleDeleteTodo(todos, todo, setTodos)}>Delete</button>
+          <button onClick={() => handleDeleteTodo(todo, setTodos)}>Delete</button>
         </p>
       </form>
     </li>

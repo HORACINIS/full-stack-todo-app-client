@@ -12,15 +12,13 @@ export const fetchTodos = async () => {
   }
 }
 
-export const handleDeleteTodo = async (todosArr, todoItem, setState) => {
+export const handleDeleteTodo = async (todoItem, setState) => {
   await fetch(`${TODOS_URL}/${todoItem._id}`, {
     method: 'DELETE'
   })
     .then((response) => response.json())
     .then((data) => {
       if (data.status === 'success') {
-        // const updatedTodos = todosArr.filter((selectedTodo) => selectedTodo._id !== todoItem['_id']);
-        // setState(updatedTodos);
         fetchTodos().then(todos => setState(todos))
       }
     })
