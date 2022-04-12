@@ -13,6 +13,30 @@ export const fetchTodos = async () => {
   }
 }
 
+export const handleAddTodo = async (e, textInput, setState, setDisableFieldsState) => {
+  e.preventDefault();
+  setDisableFieldsState(true);
+  await fetch(TODOS_URL, {
+    method: 'POST',
+    body: JSON.stringify({ name: textInput }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.status === 'success') {
+        fetchTodos().then(todos => setState(todos))
+        setDisableFieldsState(false);
+      }
+    })
+    .catch((err) => {
+      alert(err);
+      console.log('Error!', err);
+      setDisableFieldsState(false);
+    })
+}
+
 export const handleDeleteTodo = async (todoItem, setState) => {
   await fetch(`${TODOS_URL}/${todoItem._id}`, {
     method: 'DELETE'
@@ -60,7 +84,7 @@ export const handleChangeTodoProp = async (todoItem, setState, ...args) => {
         })
     }
   } catch (err) {
-    console.log('Error', err);
+    console.log('Error!', err);
     alert(err);
   }
 }
