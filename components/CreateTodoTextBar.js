@@ -6,7 +6,7 @@ const CreateTodoTextBar = ({ todos, setTodos }) => {
   const [disabledFields, setDisabledFields] = useState(false);
 
   const handleAddTodoAction = (e) => {
-    handleAddTodo(e, textInput, setTodos)
+    handleAddTodo(e, textInput, setTodos, setDisabledFields)
       .then(() => {
         // setDisabledFields(true)
         setTextInput('');

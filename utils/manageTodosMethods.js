@@ -33,7 +33,7 @@ export const handleAddTodo = async (e, textInput, setState, setDisableFieldsStat
     .catch((err) => {
       alert(err);
       console.log('Error!', err);
-      setDisableFieldsState(false);
+      // setDisableFieldsState(false);
     })
 }
 
