@@ -8,8 +8,7 @@ const CreateTodoTextBar = ({ setTodos }) => {
 
   const handleAddTodoAction = (e) => {
     e.preventDefault();
-    if (textInput.replace(/\s/g, "").trim() === "") {
-      // console.log('nop')
+    if (textInput.replace(/\s/g, "") === "") {
       setTextInput(' ');
       setErrorMessage('This cannot be empty');
       return
