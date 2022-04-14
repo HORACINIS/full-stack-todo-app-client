@@ -13,8 +13,13 @@ export const fetchTodos = async () => {
   }
 }
 
-export const handleAddTodo = async (e, textInput, setState, setDisableFieldsState) => {
-  e.preventDefault();
+export const handleAddTodo = async (textInput, setState, setDisableFieldsState) => {
+  // e.preventDefault();
+
+  // if (textInput.replace(/\s/g, "").trim() === "") {
+  //   console.log('nop')
+  //   return
+  // }
   setDisableFieldsState(true);
   await fetch(TODOS_URL, {
     method: 'POST',

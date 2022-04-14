@@ -4,9 +4,17 @@ import { handleAddTodo } from '../utils/manageTodosMethods';
 const CreateTodoTextBar = ({ setTodos }) => {
   const [textInput, setTextInput] = useState('');
   const [disabledFields, setDisabledFields] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
 
   const handleAddTodoAction = (e) => {
-    handleAddTodo(e, textInput, setTodos, setDisabledFields)
+    e.preventDefault();
+    if (textInput.replace(/\s/g, "").trim() === "") {
+      // console.log('nop')
+      setTextInput(' ');
+      setErrorMessage('This cannot be empty');
+      return
+    }
+    handleAddTodo(textInput, setTodos, setDisabledFields)
       .then(() => {
         setTextInput('');
       })
@@ -19,8 +27,17 @@ const CreateTodoTextBar = ({ setTodos }) => {
 
   return (
     <form onSubmit={handleAddTodoAction}>
-      <input type='text' disabled={disabledFields} onChange={(e) => setTextInput(e.target.value)} value={textInput} />
+      <input type='text'
+        disabled={disabledFields}
+        onChange={(e) => {
+          setTextInput(e.target.value)
+          setErrorMessage('')
+        }}
+        placeholder='Add a todo'
+        value={textInput}
+      />
       <button disabled={disabledFields} type='submit'>Add</button>
+      <div style={{ color: 'red' }}>{errorMessage}</div>
     </form>
   )
 }
